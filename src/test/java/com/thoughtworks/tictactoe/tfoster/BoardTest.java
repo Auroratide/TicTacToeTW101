@@ -9,7 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class BoardTest {
@@ -86,4 +88,15 @@ public class BoardTest {
         assertThat(slots.get(4), is("X"));
     }
 
+    @Test
+    public void shouldReturnFalseWhenNoSlotsAreTaken() throws Exception {
+        slots.set(0, "1");
+        assertFalse(board.isTaken(0));
+    }
+
+    @Test
+    public void shouldReturnTrueWhenSlotIsTaken() throws Exception {
+        slots.set(2, "X");
+        assertTrue(board.isTaken(2));
+    }
 }
