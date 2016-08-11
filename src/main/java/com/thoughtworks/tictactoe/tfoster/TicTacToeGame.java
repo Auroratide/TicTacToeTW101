@@ -24,6 +24,8 @@ public class TicTacToeGame {
         board.show();
         while(!board.isFull(FIRST_PLAYER_MARKER + SECOND_PLAYER_MARKER))
             doRound(firstPlayer, FIRST_PLAYER_MARKER);
+
+        printStream.println("Game is a draw");
         //doRound(firstPlayer, FIRST_PLAYER_MARKER);
         //doRound(secondPlayer, SECOND_PLAYER_MARKER);
     }
