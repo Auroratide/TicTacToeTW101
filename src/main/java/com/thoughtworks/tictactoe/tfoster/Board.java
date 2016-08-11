@@ -1,13 +1,29 @@
 package com.thoughtworks.tictactoe.tfoster;
 
 import java.io.PrintStream;
+import java.util.List;
 
 public class Board {
 
     private PrintStream printStream;
+    private List<String> slots;
 
-    public Board(PrintStream printStream) {
+    public Board(PrintStream printStream, List<String> slots) {
         this.printStream = printStream;
+        this.slots = slots;
+    }
+
+    public void initialize() {
+        slots.clear();
+        slots.add("1");
+        slots.add("2");
+        slots.add("3");
+        slots.add("4");
+        slots.add("5");
+        slots.add("6");
+        slots.add("7");
+        slots.add("8");
+        slots.add("9");
     }
 
     public void showBoard() {
