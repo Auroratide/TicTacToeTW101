@@ -105,4 +105,10 @@ public class BoardTest {
         slots.set(7, "O");
         assertTrue(board.isTaken(8, "XO"));
     }
+
+    @Test
+    public void shouldReturnTrueWhenBoardIsFull() throws Exception {
+
+
+    }
 }

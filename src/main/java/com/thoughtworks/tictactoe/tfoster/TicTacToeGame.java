@@ -22,8 +22,10 @@ public class TicTacToeGame {
     public void play() {
         board.initialize();
         board.show();
-        doRound(firstPlayer, FIRST_PLAYER_MARKER);
-        doRound(secondPlayer, SECOND_PLAYER_MARKER);
+        while(!board.isFull(FIRST_PLAYER_MARKER + SECOND_PLAYER_MARKER))
+            doRound(firstPlayer, FIRST_PLAYER_MARKER);
+        //doRound(firstPlayer, FIRST_PLAYER_MARKER);
+        //doRound(secondPlayer, SECOND_PLAYER_MARKER);
     }
 
     public void doRound(Player player, String marker) {
