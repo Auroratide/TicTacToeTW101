@@ -107,8 +107,11 @@ public class BoardTest {
     }
 
     @Test
-    public void shouldReturnTrueWhenBoardIsFull() throws Exception {
+    public void shouldReturnTrueWhenBoardIsFullOfXs() throws Exception {
+        slots.clear();
+        for(int i = 0; i < 9; ++i)
+            slots.add("X");
 
-
+        assertTrue(board.isFull("X"));
     }
 }
