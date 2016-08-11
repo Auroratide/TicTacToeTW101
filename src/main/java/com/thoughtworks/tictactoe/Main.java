@@ -1,10 +1,15 @@
 package com.thoughtworks.tictactoe;
 
+import com.thoughtworks.tictactoe.tfoster.Board;
 import com.thoughtworks.tictactoe.tfoster.TicTacToeGame;
+
+import java.io.PrintStream;
 
 public class Main {
     public static void main(String[] args) {
-        TicTacToeGame game = new TicTacToeGame(System.out);
+        PrintStream printStream = System.out;
+        Board board = new Board(printStream);
+        TicTacToeGame game = new TicTacToeGame(printStream, board);
         game.play();
     }
 }

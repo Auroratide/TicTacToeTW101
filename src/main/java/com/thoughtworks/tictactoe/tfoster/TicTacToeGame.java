@@ -5,20 +5,15 @@ import java.io.PrintStream;
 public class TicTacToeGame {
 
     private PrintStream printStream;
+    private Board board;
 
-    public TicTacToeGame(PrintStream printStream) {
+    public TicTacToeGame(PrintStream printStream, Board board) {
         this.printStream = printStream;
+        this.board = board;
     }
 
     public void play() {
-        showBoard();
+        board.showBoard();
     }
 
-    private void showBoard() {
-        printStream.println("1|2|3");
-        printStream.println("-----");
-        printStream.println("4|5|6");
-        printStream.println("-----");
-        printStream.println("7|8|9");
-    }
 }
