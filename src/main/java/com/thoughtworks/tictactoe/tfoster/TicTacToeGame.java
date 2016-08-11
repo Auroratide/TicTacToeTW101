@@ -12,6 +12,9 @@ public class TicTacToeGame {
     private Player firstPlayer;
     private Player secondPlayer;
 
+    private Player currentPlayer;
+    private String currentMarker;
+
     public TicTacToeGame(PrintStream printStream, Board board, Player firstPlayer, Player secondPlayer) {
         this.printStream = printStream;
         this.board = board;
@@ -22,8 +25,17 @@ public class TicTacToeGame {
     public void play() {
         board.initialize();
         board.show();
-        while(!board.isFull(FIRST_PLAYER_MARKER + SECOND_PLAYER_MARKER))
-            doRound(firstPlayer, FIRST_PLAYER_MARKER);
+
+    //  This is very smelly.  Needs refactoring, but it's 5:30 now.
+    //  Probably should offboard the marker information to player.
+        currentPlayer = firstPlayer;
+        currentMarker = FIRST_PLAYER_MARKER;
+
+        while(!board.isFull(FIRST_PLAYER_MARKER + SECOND_PLAYER_MARKER)) {
+            doRound(currentPlayer, currentMarker);
+            swapPlayers();
+            swapMarkers();
+        }
 
         printStream.println("Game is a draw");
         //doRound(firstPlayer, FIRST_PLAYER_MARKER);
@@ -39,5 +51,19 @@ public class TicTacToeGame {
 
         board.mark(playerSlotChoice, marker);
         board.show();
+    }
+
+    private void swapPlayers() {
+        if(currentPlayer == firstPlayer)
+            currentPlayer = secondPlayer;
+        else
+            currentPlayer = firstPlayer;
+    }
+
+    private void swapMarkers() {
+        if(currentMarker.equals(FIRST_PLAYER_MARKER))
+            currentMarker = SECOND_PLAYER_MARKER;
+        else
+            currentMarker = FIRST_PLAYER_MARKER;
     }
 }

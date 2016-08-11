@@ -123,7 +123,7 @@ public class TicTacToeGameTest {
 
     @Test
     public void shouldAskFirstPlayerAfterSecondPlayerGoes() throws Exception {
-        when(board.isFull(anyString())).thenReturn(false, false, true);
+        when(board.isFull(anyString())).thenReturn(false, false, false, true);
         ticTacToeGame.play();
 
         InOrder inOrder = inOrder(firstPlayer, secondPlayer);
