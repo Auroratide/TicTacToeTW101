@@ -2,6 +2,7 @@ package com.thoughtworks.tictactoe.tfoster;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 
 import java.io.PrintStream;
 
@@ -108,5 +109,25 @@ public class TicTacToeGameTest {
         ticTacToeGame.play();
 
         verify(printStream).println("Game is a draw");
+    }
+
+    @Test
+    public void shouldAskSecondPlayerAfterFirstPlayerGoes() throws Exception {
+        when(board.isFull(anyString())).thenReturn(false, false, true);
+        ticTacToeGame.play();
+
+        InOrder inOrder = inOrder(firstPlayer, secondPlayer);
+        inOrder.verify(firstPlayer).makeChoice();
+        inOrder.verify(secondPlayer).makeChoice();
+    }
+
+    @Test
+    public void shouldAskFirstPlayerAfterSecondPlayerGoes() throws Exception {
+        when(board.isFull(anyString())).thenReturn(false, false, true);
+        ticTacToeGame.play();
+
+        InOrder inOrder = inOrder(firstPlayer, secondPlayer);
+        inOrder.verify(secondPlayer).makeChoice();
+        inOrder.verify(firstPlayer).makeChoice();
     }
 }
