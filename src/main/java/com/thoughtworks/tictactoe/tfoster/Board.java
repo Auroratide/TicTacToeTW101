@@ -40,4 +40,8 @@ public class Board {
     //  For Tic Tac Toe, this is probably "XO"; allows Board to not be bound to X and O exclusively
         return validTokens.contains(slots.get(slot - 1));
     }
+
+    public boolean isFull(String validTokens) {
+        return false;
+    }
 }

@@ -78,4 +78,13 @@ public class TicTacToeGameTest {
 
         verify(printStream).println("Location already taken");
     }
+
+    @Test
+    public void shouldKeepDoingRoundsUntilBoardIsFull() throws Exception {
+    //  Note: In this test, we don't care about whether the players alternate
+        when(board.isFull(anyString())).thenReturn(false, false, false, false, false, false, false, true, false);
+        ticTacToeGame.play();
+
+        verify(board, times(8)).isFull(anyString());
+    }
 }
