@@ -35,6 +35,6 @@ public class Board {
     }
 
     public void mark(int slot, String letter) {
-
+        slots.set(slot, letter);
     }
 }
