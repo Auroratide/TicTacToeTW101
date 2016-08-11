@@ -95,8 +95,14 @@ public class BoardTest {
     }
 
     @Test
-    public void shouldReturnTrueWhenSlotIsTaken() throws Exception {
+    public void shouldReturnTrueWhenSlotIsTakenByAnX() throws Exception {
         slots.set(2, "X");
         assertTrue(board.isTaken(3));
+    }
+
+    @Test
+    public void shouldReturnTrueWhenSlotIsTakenByAnO() throws Exception {
+        slots.set(7, "O");
+        assertTrue(board.isTaken(8));
     }
 }
