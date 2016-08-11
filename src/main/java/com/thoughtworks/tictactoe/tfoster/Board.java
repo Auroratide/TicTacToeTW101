@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Board {
 
+    public static final String SEPARATOR = "|";
+    public static final String ROW_SEPARATOR = "-----";
     private PrintStream printStream;
     private List<String> slots;
 
@@ -27,11 +29,11 @@ public class Board {
     }
 
     public void showBoard() {
-        printStream.println("1|2|3");
-        printStream.println("-----");
-        printStream.println("4|5|6");
-        printStream.println("-----");
-        printStream.println("7|8|9");
+        printStream.println(slots.get(0) + SEPARATOR + slots.get(1) + SEPARATOR + slots.get(2));
+        printStream.println(ROW_SEPARATOR);
+        printStream.println(slots.get(3) + SEPARATOR + slots.get(4) + SEPARATOR + slots.get(5));
+        printStream.println(ROW_SEPARATOR);
+        printStream.println(slots.get(6) + SEPARATOR + slots.get(7) + SEPARATOR + slots.get(8));
     }
 
     public void mark(int slot, String letter) {
