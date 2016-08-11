@@ -39,8 +39,4 @@ public class Board {
     public void mark(int slot, String letter) {
         slots.set(slot - 1, letter);
     }
-
-    public void doRound(TicTacToePlayer firstPlayer) {
-
-    }
 }

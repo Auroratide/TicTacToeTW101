@@ -34,7 +34,7 @@ public class TicTacToeGameTest {
     @Test
     public void shouldMarkFirstSlotOnBoardAsXWhenFirstPlayerSelectsXInFirstSlot() throws Exception {
         when(firstPlayer.makeChoice()).thenReturn(1);
-        board.doRound(firstPlayer);
+        ticTacToeGame.doRound(firstPlayer);
 
         verify(board).mark(1, "X");
     }
