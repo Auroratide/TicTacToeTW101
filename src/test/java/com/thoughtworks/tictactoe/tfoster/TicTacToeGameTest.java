@@ -38,4 +38,11 @@ public class TicTacToeGameTest {
 
         verify(board).mark(1, "X");
     }
+
+    public void shouldMarkSecondSlotOnBoardAsXWhenFirstPlayerSelectsXInSecondSlot() throws Exception {
+        when(firstPlayer.makeChoice()).thenReturn(1);
+        ticTacToeGame.doRound(firstPlayer);
+
+        verify(board).mark(2, "X");
+    }
 }

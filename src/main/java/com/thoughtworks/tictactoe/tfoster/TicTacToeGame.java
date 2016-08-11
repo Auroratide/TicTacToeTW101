@@ -17,6 +17,6 @@ public class TicTacToeGame {
     }
 
     public void doRound(TicTacToePlayer player) {
-
+        board.mark(1, "X");
     }
 }
