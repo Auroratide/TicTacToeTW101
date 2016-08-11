@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -26,14 +27,49 @@ public class BoardTest {
     }
 
     @Test
-    public void shouldBoardOfSlotNumbersWhenBoardIsInitialized() throws Exception {
+    public void shouldHave1InFirstSlotWhenBoardIsInitialized() throws Exception {
         board.initialize();
+
+        assertThat(slots.get(0), is("1"));
+    }
+
+    @Test
+    public void shouldHave4InFourthSlotWhenBoardIsInitialized() throws Exception {
+        board.initialize();
+
+        assertThat(slots.get(3), is("4"));
+    }
+
+    @Test
+    public void shouldShowNumberBoardWhenSlotsContainsNumbers() throws Exception {
+        slots.clear();
+        for(int i = 1; i <= 9; ++i)
+            slots.add(String.valueOf(i));
+
         board.show();
 
-        verify(printStream).println("1|2|3");
-        verify(printStream, times(2)).println("-----"); // Mockito doesn't care about ordering
-        verify(printStream).println("4|5|6");
-        verify(printStream).println("7|8|9");
+        verify(printStream).println(
+                        "1|2|3\n" +
+                        "-----\n" +
+                        "4|5|6\n" +
+                        "-----\n" +
+                        "7|8|9");
+    }
+
+    @Test
+    public void shouldShowLetterBoardWhenSlotsContainLetters() throws Exception {
+        List<String> letters = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i");
+        slots.clear();
+        slots.addAll(letters);
+
+        board.show();
+
+        verify(printStream).println(
+                        "a|b|c\n" +
+                        "-----\n" +
+                        "d|e|f\n" +
+                        "-----\n" +
+                        "g|h|i");
     }
 
     @Test
@@ -44,36 +80,10 @@ public class BoardTest {
     }
 
     @Test
-    public void shouldShowFirstSlotAsXWhenFirstSlotIsMarkedAsX() throws Exception {
-        slots.set(0, "X");
-        board.show();
+    public void shouldMarkFifthSlotWithXWhenFifthSlotIsMarkedAsX() throws Exception {
+        board.mark(5, "X");
 
-        verify(printStream).println("X|2|3");
+        assertThat(slots.get(4), is("X"));
     }
 
-    @Test
-    public void shouldShowSecondSlotAsXWhenSecondSlotIsMarkedAsX() throws Exception {
-        slots.set(1, "X");
-        board.show();
-
-        verify(printStream).println("1|X|3");
-    }
-
-    @Test
-    public void shouldShowNinthSlotAsXWhenNinthSlotIsMarkedAsX() throws Exception {
-        slots.set(8, "X");
-        board.show();
-
-        verify(printStream).println("7|8|X");
-    }
-
-    @Test
-    public void shouldShowFirstAndFifthSlotAsXWhenFirstAndFifthSlotAreMarkedAsX() throws Exception {
-        slots.set(0, "X");
-        slots.set(4, "X");
-        board.show();
-
-        verify(printStream).println("X|2|3");
-        verify(printStream).println("4|X|6");
-    }
 }

@@ -5,9 +5,7 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class TicTacToeGameTest {
 
@@ -35,7 +33,7 @@ public class TicTacToeGameTest {
     public void shouldSeeBoardWhenGameIsStarted() throws Exception {
         ticTacToeGame.play();
 
-        verify(board).show();
+        verify(board, atLeastOnce()).show();
     }
 
     @Test
