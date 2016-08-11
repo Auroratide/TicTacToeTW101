@@ -38,8 +38,6 @@ public class TicTacToeGame {
         }
 
         printStream.println("Game is a draw");
-        //doRound(firstPlayer, FIRST_PLAYER_MARKER);
-        //doRound(secondPlayer, SECOND_PLAYER_MARKER);
     }
 
     public void doRound(Player player, String marker) {
