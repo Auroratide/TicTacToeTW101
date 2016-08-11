@@ -101,4 +101,12 @@ public class TicTacToeGameTest {
 
         verify(board, times(2)).isFull(anyString());
     }
+
+    @Test
+    public void shouldClaimGameIsADrawWhenGameIsOver() throws Exception {
+        stopGameImmediately();
+        ticTacToeGame.play();
+
+        verify(printStream).println("Game is a draw");
+    }
 }
