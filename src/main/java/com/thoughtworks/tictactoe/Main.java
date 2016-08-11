@@ -1,7 +1,10 @@
 package com.thoughtworks.tictactoe;
 
+import com.thoughtworks.tictactoe.tfoster.TicTacToeGame;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello Tic Tac Toee");
+        TicTacToeGame game = new TicTacToeGame(System.out);
+        game.play();
     }
 }
