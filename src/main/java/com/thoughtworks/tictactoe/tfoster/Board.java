@@ -42,6 +42,9 @@ public class Board {
     }
 
     public boolean isFull(String validTokens) {
-        return false;
+        for(int i = 0; i < slots.size(); ++i)
+            if(!isTaken(i + 1, validTokens))
+                return false;
+        return true;
     }
 }

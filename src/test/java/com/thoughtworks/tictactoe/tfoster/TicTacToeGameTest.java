@@ -15,6 +15,10 @@ public class TicTacToeGameTest {
     private Player firstPlayer;
     private Player secondPlayer;
 
+    private void stopGameImmediately() {
+        when(board.isFull(anyString())).thenReturn(true);
+    }
+
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
@@ -26,6 +30,7 @@ public class TicTacToeGameTest {
 
     @Test
     public void shouldInitializeBoardWhenGameIsStarted() throws Exception {
+        stopGameImmediately();
         ticTacToeGame.play();
 
         verify(board).initialize();
@@ -33,6 +38,7 @@ public class TicTacToeGameTest {
 
     @Test
     public void shouldSeeBoardWhenGameIsStarted() throws Exception {
+        stopGameImmediately();
         ticTacToeGame.play();
 
         verify(board, atLeastOnce()).show();
@@ -80,11 +86,19 @@ public class TicTacToeGameTest {
     }
 
     @Test
-    public void shouldKeepDoingRoundsUntilBoardIsFull() throws Exception {
-    //  Note: In this test, we don't care about whether the players alternate
-        when(board.isFull(anyString())).thenReturn(false, false, false, false, false, false, false, true, false);
+    public void shouldTerminateRoundsWhenBoardIsAlreadyFull() throws Exception {
+        when(board.isFull(anyString())).thenReturn(true, false);
         ticTacToeGame.play();
 
-        verify(board, times(8)).isFull(anyString());
+        verify(board).isFull(anyString());
+    }
+
+    @Test
+    public void shouldKeepDoingRoundsUntilBoardIsFull() throws Exception {
+    //  Note: In this test, we don't care about whether the players alternate
+        when(board.isFull(anyString())).thenReturn(false, true, false);
+        ticTacToeGame.play();
+
+        verify(board, times(2)).isFull(anyString());
     }
 }

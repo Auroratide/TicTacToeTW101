@@ -114,4 +114,34 @@ public class BoardTest {
 
         assertTrue(board.isFull("X"));
     }
+
+    @Test
+    public void shouldReturnTrueWhenBoardIsFullOfOs() throws Exception {
+        slots.clear();
+        for(int i = 0; i < 9; ++i)
+            slots.add("O");
+
+        assertTrue(board.isFull("O"));
+    }
+
+    @Test
+    public void shouldReturnFalseWhenBoardIsNotFull() throws Exception {
+        slots.clear();
+        for(int i = 0; i < 9; ++i)
+            slots.add("X");
+        slots.set(2, "3");
+
+        assertFalse(board.isFull("X"));
+    }
+
+    @Test
+    public void shouldReturnTrueWhenBoardIsFullOfXsOrOs() throws Exception {
+        slots.clear();
+        for(int i = 0; i < 9; ++i)
+            slots.add("X");
+        slots.set(1, "O");
+        slots.set(5, "O");
+
+        assertTrue(board.isFull("XO"));
+    }
 }
