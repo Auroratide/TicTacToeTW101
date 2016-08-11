@@ -40,7 +40,7 @@ public class BoardTest {
     public void shouldMarkFirstSlotWithXWhenFirstSlotIsMarkedAsX() throws Exception {
         board.mark(1, "X");
 
-        assertThat(slots.get(1), is("X"));
+        assertThat(slots.get(0), is("X"));
     }
 
     @Test

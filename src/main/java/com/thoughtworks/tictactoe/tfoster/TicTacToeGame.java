@@ -7,7 +7,7 @@ public class TicTacToeGame {
     private PrintStream printStream;
     private Board board;
 
-    public TicTacToeGame(PrintStream printStream, Board board) {
+    public TicTacToeGame(PrintStream printStream, Board board, TicTacToePlayer firstPlayer) {
         this.printStream = printStream;
         this.board = board;
     }
