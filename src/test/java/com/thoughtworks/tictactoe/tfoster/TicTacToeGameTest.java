@@ -70,4 +70,12 @@ public class TicTacToeGameTest {
         verify(board, times(3)).isTaken(anyInt());
         verify(board).mark(anyInt(), anyString());
     }
+
+    @Test
+    public void shouldInformPlayerWhenTakenSlotWasSelected() throws Exception {
+        when(board.isTaken(anyInt())).thenReturn(true, false);
+        ticTacToeGame.doRound(firstPlayer, "X");
+
+        verify(printStream).println("Location already taken");
+    }
 }
