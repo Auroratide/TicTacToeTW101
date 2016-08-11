@@ -91,12 +91,12 @@ public class BoardTest {
     @Test
     public void shouldReturnFalseWhenNoSlotsAreTaken() throws Exception {
         slots.set(0, "1");
-        assertFalse(board.isTaken(0));
+        assertFalse(board.isTaken(1));
     }
 
     @Test
     public void shouldReturnTrueWhenSlotIsTaken() throws Exception {
         slots.set(2, "X");
-        assertTrue(board.isTaken(2));
+        assertTrue(board.isTaken(3));
     }
 }

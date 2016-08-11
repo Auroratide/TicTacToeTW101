@@ -36,6 +36,6 @@ public class Board {
     }
 
     public boolean isTaken(int slot) {
-        return false;
+        return slots.get(slot - 1).equals("X");
     }
 }
