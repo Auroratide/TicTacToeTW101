@@ -41,7 +41,7 @@ public class TicTacToeGameTest {
     @Test
     public void shouldMarkFirstSlotOnBoardAsXWhenFirstPlayerSelectsXInFirstSlot() throws Exception {
         when(firstPlayer.makeChoice()).thenReturn(1);
-        ticTacToeGame.doRound(firstPlayer);
+        ticTacToeGame.doRound(firstPlayer, "X");
 
         verify(board).mark(1, "X");
     }
@@ -49,7 +49,7 @@ public class TicTacToeGameTest {
     @Test
     public void shouldMarkSecondSlotOnBoardAsXWhenFirstPlayerSelectsXInSecondSlot() throws Exception {
         when(firstPlayer.makeChoice()).thenReturn(2);
-        ticTacToeGame.doRound(firstPlayer);
+        ticTacToeGame.doRound(firstPlayer, "X");
 
         verify(board).mark(2, "X");
     }
@@ -57,7 +57,7 @@ public class TicTacToeGameTest {
     @Test
     public void shouldMarkThirdSlotOnBoardAsOWhenSecondPlayerSelectsThirdSlot() throws Exception {
         when(secondPlayer.makeChoice()).thenReturn(3);
-        ticTacToeGame.doRound(secondPlayer);
+        ticTacToeGame.doRound(secondPlayer, "O");
 
         verify(board).mark(3, "O");
     }
