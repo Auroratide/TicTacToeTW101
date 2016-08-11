@@ -17,6 +17,7 @@ public class TicTacToeGame {
     }
 
     public void doRound(TicTacToePlayer player) {
-        board.mark(1, "X");
+        int playerSlotChoice = player.makeChoice();
+        board.mark(playerSlotChoice, "X");
     }
 }
