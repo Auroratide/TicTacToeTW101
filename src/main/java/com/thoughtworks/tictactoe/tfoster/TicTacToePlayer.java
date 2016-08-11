@@ -11,6 +11,6 @@ public class TicTacToePlayer {
     }
 
     public int makeChoice() {
-        return 0;
+        return 1;
     }
 }
