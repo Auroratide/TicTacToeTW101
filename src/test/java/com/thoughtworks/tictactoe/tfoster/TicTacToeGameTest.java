@@ -61,4 +61,12 @@ public class TicTacToeGameTest {
 
         verify(board).mark(3, "O");
     }
+
+    @Test
+    public void shouldKeepPollingPlayerWhileSlotChoiceIsAlreadyTaken() throws Exception {
+        when(board.isTaken(anyInt())).thenReturn(true, true, false, true);
+
+        verify(board, times(3)).isTaken(anyInt());
+        verify(board).mark(anyInt(), anyString());
+    }
 }
