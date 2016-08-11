@@ -14,7 +14,8 @@ public class Main {
         PrintStream printStream = System.out;
         Board board = new Board(printStream, new ArrayList<String>());
         TicTacToePlayer firstPlayer = new TicTacToePlayer(new BufferedReader(new InputStreamReader(System.in)));
-        TicTacToeGame game = new TicTacToeGame(printStream, board, firstPlayer);
+        TicTacToePlayer secondPlayer = new TicTacToePlayer(new BufferedReader(new InputStreamReader(System.in)));
+        TicTacToeGame game = new TicTacToeGame(printStream, board, firstPlayer, secondPlayer);
         game.play();
     }
 }

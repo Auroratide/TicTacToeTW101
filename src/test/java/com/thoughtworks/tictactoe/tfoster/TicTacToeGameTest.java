@@ -13,13 +13,15 @@ public class TicTacToeGameTest {
     private TicTacToeGame ticTacToeGame;
     private Board board;
     private TicTacToePlayer firstPlayer;
+    private TicTacToePlayer secondPlayer;
 
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
         board = mock(Board.class);
         firstPlayer = mock(TicTacToePlayer.class);
-        ticTacToeGame = new TicTacToeGame(printStream, board, firstPlayer);
+        secondPlayer = mock(TicTacToePlayer.class);
+        ticTacToeGame = new TicTacToeGame(printStream, board, firstPlayer, secondPlayer);
     }
 
     @Test
@@ -50,5 +52,13 @@ public class TicTacToeGameTest {
         ticTacToeGame.doRound(firstPlayer);
 
         verify(board).mark(2, "X");
+    }
+
+    @Test
+    public void shouldMarkThirdSlotOnBoardAsOWhenSecondPlayerSelectsThirdSlot() throws Exception {
+        when(secondPlayer.makeChoice()).thenReturn(3);
+        ticTacToeGame.doRound(secondPlayer);
+
+        verify(board).mark(3, "O");
     }
 }
