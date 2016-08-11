@@ -35,7 +35,9 @@ public class Board {
         slots.set(slot - 1, letter);
     }
 
-    public boolean isTaken(int slot) {
-        return slots.get(slot - 1).equals("X") || slots.get(slot - 1).equals("O");
+    public boolean isTaken(int slot, String validTokens) {
+    //  validTokens represents tokens that can be construed as occupying a square.
+    //  For Tic Tac Toe, this is probably "XO"; allows Board to not be bound to X and O exclusively
+        return validTokens.contains(slots.get(slot - 1));
     }
 }

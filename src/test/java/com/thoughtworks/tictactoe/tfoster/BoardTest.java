@@ -91,18 +91,18 @@ public class BoardTest {
     @Test
     public void shouldReturnFalseWhenNoSlotsAreTaken() throws Exception {
         slots.set(0, "1");
-        assertFalse(board.isTaken(1));
+        assertFalse(board.isTaken(1, "XO"));
     }
 
     @Test
     public void shouldReturnTrueWhenSlotIsTakenByAnX() throws Exception {
         slots.set(2, "X");
-        assertTrue(board.isTaken(3));
+        assertTrue(board.isTaken(3, "XO"));
     }
 
     @Test
     public void shouldReturnTrueWhenSlotIsTakenByAnO() throws Exception {
         slots.set(7, "O");
-        assertTrue(board.isTaken(8));
+        assertTrue(board.isTaken(8, "XO"));
     }
 }

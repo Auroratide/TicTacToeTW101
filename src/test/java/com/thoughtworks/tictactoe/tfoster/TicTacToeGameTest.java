@@ -64,16 +64,16 @@ public class TicTacToeGameTest {
 
     @Test
     public void shouldKeepPollingPlayerWhileSlotChoiceIsAlreadyTaken() throws Exception {
-        when(board.isTaken(anyInt())).thenReturn(true, true, false, true);
+        when(board.isTaken(anyInt(), anyString())).thenReturn(true, true, false, true);
         ticTacToeGame.doRound(firstPlayer, "X");
 
-        verify(board, times(3)).isTaken(anyInt());
+        verify(board, times(3)).isTaken(anyInt(), anyString());
         verify(board).mark(anyInt(), anyString());
     }
 
     @Test
     public void shouldInformPlayerWhenTakenSlotWasSelected() throws Exception {
-        when(board.isTaken(anyInt())).thenReturn(true, false);
+        when(board.isTaken(anyInt(), anyString())).thenReturn(true, false);
         ticTacToeGame.doRound(firstPlayer, "X");
 
         verify(printStream).println("Location already taken");
