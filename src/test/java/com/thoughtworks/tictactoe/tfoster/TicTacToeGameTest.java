@@ -25,10 +25,17 @@ public class TicTacToeGameTest {
     }
 
     @Test
+    public void shouldInitializeBoardWhenGameIsStarted() throws Exception {
+        ticTacToeGame.play();
+
+        verify(board).initialize();
+    }
+
+    @Test
     public void shouldSeeBoardWhenGameIsStarted() throws Exception {
         ticTacToeGame.play();
 
-        verify(board).showBoard();
+        verify(board).show();
     }
 
     @Test

@@ -28,7 +28,7 @@ public class Board {
         slots.add("9");
     }
 
-    public void showBoard() {
+    public void show() {
         printStream.println(slots.get(0) + SEPARATOR + slots.get(1) + SEPARATOR + slots.get(2));
         printStream.println(ROW_SEPARATOR);
         printStream.println(slots.get(3) + SEPARATOR + slots.get(4) + SEPARATOR + slots.get(5));
