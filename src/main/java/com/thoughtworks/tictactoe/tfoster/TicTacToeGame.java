@@ -27,9 +27,11 @@ public class TicTacToeGame {
     }
 
     public void doRound(TicTacToePlayer player, String marker) {
-        int playerSlotChoice = -1;
-        do playerSlotChoice = player.makeChoice();
-        while(board.isTaken(playerSlotChoice));
+        int playerSlotChoice = player.makeChoice();
+        while(board.isTaken(playerSlotChoice)) {
+            printStream.println("Location already taken");
+            playerSlotChoice = player.makeChoice();
+        }
 
         board.mark(playerSlotChoice, marker);
         board.show();
