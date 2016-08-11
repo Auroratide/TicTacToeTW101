@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.PrintStream;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class TicTacToeGameTest {
@@ -16,9 +17,8 @@ public class TicTacToeGameTest {
         ticTacToeGame.play();
 
         verify(printStream).println("1|2|3");
-        verify(printStream).println("-----");
+        verify(printStream, times(2)).println("-----"); // Mockito doesn't care about ordering
         verify(printStream).println("4|5|6");
-        verify(printStream).println("-----");
         verify(printStream).println("7|8|9");
     }
 }
