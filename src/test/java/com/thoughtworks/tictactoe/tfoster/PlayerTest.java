@@ -10,15 +10,15 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class TicTacToePlayerTest {
+public class PlayerTest {
 
     private BufferedReader reader;
-    private TicTacToePlayer player;
+    private Player player;
 
     @Before
     public void setUp() throws Exception {
         reader = mock(BufferedReader.class);
-        player = new TicTacToePlayer(reader);
+        player = new Player(reader);
     }
 
     @Test

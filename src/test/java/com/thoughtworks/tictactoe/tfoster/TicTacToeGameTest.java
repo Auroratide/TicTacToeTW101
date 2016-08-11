@@ -12,15 +12,15 @@ public class TicTacToeGameTest {
     private PrintStream printStream;
     private TicTacToeGame ticTacToeGame;
     private Board board;
-    private TicTacToePlayer firstPlayer;
-    private TicTacToePlayer secondPlayer;
+    private Player firstPlayer;
+    private Player secondPlayer;
 
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
         board = mock(Board.class);
-        firstPlayer = mock(TicTacToePlayer.class);
-        secondPlayer = mock(TicTacToePlayer.class);
+        firstPlayer = mock(Player.class);
+        secondPlayer = mock(Player.class);
         ticTacToeGame = new TicTacToeGame(printStream, board, firstPlayer, secondPlayer);
     }
 

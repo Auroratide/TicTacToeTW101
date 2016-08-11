@@ -2,7 +2,7 @@ package com.thoughtworks.tictactoe;
 
 import com.thoughtworks.tictactoe.tfoster.Board;
 import com.thoughtworks.tictactoe.tfoster.TicTacToeGame;
-import com.thoughtworks.tictactoe.tfoster.TicTacToePlayer;
+import com.thoughtworks.tictactoe.tfoster.Player;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,8 +13,8 @@ public class Main {
     public static void main(String[] args) {
         PrintStream printStream = System.out;
         Board board = new Board(printStream, new ArrayList<String>());
-        TicTacToePlayer firstPlayer = new TicTacToePlayer(new BufferedReader(new InputStreamReader(System.in)));
-        TicTacToePlayer secondPlayer = new TicTacToePlayer(new BufferedReader(new InputStreamReader(System.in)));
+        Player firstPlayer = new Player(new BufferedReader(new InputStreamReader(System.in)));
+        Player secondPlayer = new Player(new BufferedReader(new InputStreamReader(System.in)));
         TicTacToeGame game = new TicTacToeGame(printStream, board, firstPlayer, secondPlayer);
         game.play();
     }
