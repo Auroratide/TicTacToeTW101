@@ -18,7 +18,7 @@ public class Player {
         this.reader = reader;
     }
 
-    public int takeTurn() {
+    public void takeTurn() {
 
         printStream.println("Input the number of the slot where you want your mark");
 
@@ -29,8 +29,6 @@ public class Player {
         }
 
         board.mark(playerSlotChoice, marker);
-
-        return playerSlotChoice;
     }
 
     private int getPlayerInput() {
