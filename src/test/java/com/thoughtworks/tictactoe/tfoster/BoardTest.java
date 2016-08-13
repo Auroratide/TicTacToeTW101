@@ -170,4 +170,44 @@ public class BoardTest {
 
         assertFalse(board.hasThreeInARow("X"));
     }
+
+    @Test
+    public void shouldReturnTrueWhenXHasThreeInAColumn() throws Exception {
+        slots.set(2, "X");
+        slots.set(5, "X");
+        slots.set(8, "X");
+
+        assertTrue(board.hasThreeInAColumn("X"));
+    }
+
+    @Test
+    public void shouldReturnFalseWhenXDoesNotHaveThreeInAColumn() throws Exception {
+        slots.clear();
+        for(int i = 0; i < 9; ++i)
+            slots.add("X");
+        slots.set(0, "O");
+        slots.set(4, "O");
+        slots.set(8, "O");
+
+        assertFalse(board.hasThreeInAColumn("X"));
+    }
+
+    @Test
+    public void shouldReturnTrueWhenXHasThreeInADiagonal() throws Exception {
+        slots.set(0, "X");
+        slots.set(4, "X");
+        slots.set(8, "X");
+
+        assertTrue(board.hasThreeInADiagonal("X"));
+    }
+
+    @Test
+    public void shouldReturnFalseWhenXDoesNotHaveThreeInADiagonal() throws Exception {
+        slots.clear();
+        for(int i = 0; i < 9; ++i)
+            slots.add("X");
+        slots.set(4, "O");
+
+        assertFalse(board.hasThreeInADiagonal("X"));
+    }
 }

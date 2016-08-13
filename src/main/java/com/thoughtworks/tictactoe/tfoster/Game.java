@@ -19,25 +19,30 @@ public class Game {
     }
 
     public void play() {
-        board.initialize();
-        board.show();
-        currentPlayer = firstPlayer;
-
-        while(!board.isFull()) {
-            currentPlayer.takeTurn();
-            if(currentPlayer.hasWon())
-                break;
-            swapPlayers();
-            board.show();
-        }
-
-        printStream.println("Game is a draw");
+        beginGame();
+        while(!board.isFull() && !currentPlayer.hasWon())
+            doTurn();
+        endGame();
     }
 
-    public void doTurn() {
+    private void doTurn() {
         currentPlayer.takeTurn();
-        swapPlayers();
+        if(!currentPlayer.hasWon())
+            swapPlayers();
         board.show();
+    }
+
+    private void beginGame() {
+        board.initialize();
+        currentPlayer = firstPlayer;
+        board.show();
+    }
+
+    private void endGame() {
+        if(currentPlayer.hasWon())
+            printStream.println(currentPlayer.name() + " Wins!");
+        else
+            printStream.println("Game is a draw");
     }
 
     private void swapPlayers() {

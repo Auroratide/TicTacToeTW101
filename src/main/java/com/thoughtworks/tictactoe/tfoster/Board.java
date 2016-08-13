@@ -58,4 +58,19 @@ public class Board {
         }
         return false;
     }
+
+    public boolean hasThreeInAColumn(String marker) {
+        for(int i = 0; i <= 2; ++i) {
+            if(slots.get(i).equals(marker) &&
+                    slots.get(3 + i).equals(marker) &&
+                    slots.get(6 + i).equals(marker))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean hasThreeInADiagonal(String marker) {
+        return (slots.get(0).equals(marker) && slots.get(4).equals(marker) && slots.get(8).equals(marker)) ||
+                (slots.get(6).equals(marker) && slots.get(4).equals(marker) && slots.get(2).equals(marker));
+    }
 }

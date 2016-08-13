@@ -6,8 +6,6 @@ import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.PrintStream;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.*;
 
@@ -23,7 +21,7 @@ public class PlayerTest {
         board = mock(Board.class);
         reader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
-        player = new Player("<MARKER>", board, printStream, reader);
+        player = new Player("<NAME>", "<MARKER>", board, printStream, reader);
 
         when(reader.readLine()).thenReturn("1");
     }
@@ -53,7 +51,7 @@ public class PlayerTest {
 
     @Test
     public void shouldMarkBoardWithOWhenPlayerMarkerIsO() throws Exception {
-        player = new Player("O", board, printStream, reader);
+        player = new Player("Player 2", "O", board, printStream, reader);
         player.takeTurn();
 
         verify(board).mark(1, "O");
@@ -81,4 +79,19 @@ public class PlayerTest {
 
         verify(board).hasThreeInARow("<MARKER>");
     }
+
+    @Test
+    public void shouldPollBoardForThreeInAColumnWhenAskedIfPlayerHasWon() throws Exception {
+        player.hasWon();
+
+        verify(board).hasThreeInAColumn("<MARKER>");
+    }
+
+    @Test
+    public void shouldPollBoardForThreeInADiagonalWhenAskedIfPlayerHasWon() throws Exception {
+        player.hasWon();
+
+        verify(board).hasThreeInADiagonal("<MARKER>");
+    }
+
 }

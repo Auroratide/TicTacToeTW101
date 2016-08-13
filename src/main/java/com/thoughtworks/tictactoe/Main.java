@@ -17,8 +17,8 @@ public class Main {
         markers.add("X");
         markers.add("O");
         Board board = new Board(markers, printStream, new ArrayList<String>());
-        Player firstPlayer = new Player(markers.get(0), board, printStream, new BufferedReader(new InputStreamReader(System.in)));
-        Player secondPlayer = new Player(markers.get(1), board, printStream, new BufferedReader(new InputStreamReader(System.in)));
+        Player firstPlayer = new Player("Player 1", markers.get(0), board, printStream, new BufferedReader(new InputStreamReader(System.in)));
+        Player secondPlayer = new Player("Player 2", markers.get(1), board, printStream, new BufferedReader(new InputStreamReader(System.in)));
         Game game = new Game(printStream, board, firstPlayer, secondPlayer);
         game.play();
     }

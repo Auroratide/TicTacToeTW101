@@ -6,12 +6,14 @@ import java.io.PrintStream;
 
 public class Player {
 
+    private String name;
     private String marker;
     private Board board;
     private PrintStream printStream;
     private BufferedReader reader;
 
-    public Player(String marker, Board board, PrintStream printStream, BufferedReader reader) {
+    public Player(String name, String marker, Board board, PrintStream printStream, BufferedReader reader) {
+        this.name = name;
         this.marker = marker;
         this.board = board;
         this.printStream = printStream;
@@ -43,6 +45,10 @@ public class Player {
     }
 
     public boolean hasWon() {
-        return board.hasThreeInARow(marker);
+        return board.hasThreeInARow(marker) || board.hasThreeInAColumn(marker) || board.hasThreeInADiagonal(marker);
+    }
+
+    public String name() {
+        return name;
     }
 }
