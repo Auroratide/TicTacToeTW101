@@ -18,7 +18,7 @@ public class Player {
         this.reader = reader;
     }
 
-    public int makeChoice() {
+    public int takeTurn() {
 
         printStream.println("Input the number of the slot where you want your mark");
 

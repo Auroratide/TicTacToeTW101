@@ -30,7 +30,7 @@ public class PlayerTest {
 
     @Test
     public void shouldPromptUserForInputWhenMakingAChoice() throws Exception {
-        player.makeChoice();
+        player.takeTurn();
 
         verify(printStream).println("Input the number of the slot where you want your mark");
     }
@@ -38,7 +38,7 @@ public class PlayerTest {
     @Test
     public void shouldMarkFirstSlotOnBoardWhenPlayerSelectsFirstSlot() throws Exception {
         when(reader.readLine()).thenReturn("1");
-        player.makeChoice();
+        player.takeTurn();
 
         verify(board).mark(1, "<MARKER>");
     }
@@ -46,7 +46,7 @@ public class PlayerTest {
     @Test
     public void shouldMarkSecondSlotOnBoardWhenPlayerSelectsSecondSlot() throws Exception {
         when(reader.readLine()).thenReturn("2");
-        player.makeChoice();
+        player.takeTurn();
 
         verify(board).mark(2, "<MARKER>");
     }
@@ -54,7 +54,7 @@ public class PlayerTest {
     @Test
     public void shouldMarkBoardWithOWhenPlayerMarkerIsO() throws Exception {
         player = new Player("O", board, printStream, reader);
-        player.makeChoice();
+        player.takeTurn();
 
         verify(board).mark(1, "O");
     }
@@ -62,7 +62,7 @@ public class PlayerTest {
     @Test
     public void shouldKeepPollingPlayerWhileSlotChoiceIsAlreadyTaken() throws Exception {
         when(board.isTaken(anyInt())).thenReturn(true, true, false, true);
-        player.makeChoice();
+        player.takeTurn();
 
         verify(board, times(3)).isTaken(anyInt());
     }
@@ -70,7 +70,7 @@ public class PlayerTest {
     @Test
     public void shouldInformPlayerWhenTakenSlotWasSelected() throws Exception {
         when(board.isTaken(anyInt())).thenReturn(true, false);
-        player.makeChoice();
+        player.takeTurn();
 
         verify(printStream).println("Location already taken");
     }
