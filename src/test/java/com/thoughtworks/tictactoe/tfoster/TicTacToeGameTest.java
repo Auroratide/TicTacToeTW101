@@ -17,7 +17,7 @@ public class TicTacToeGameTest {
     private Player secondPlayer;
 
     private void stopGameImmediately() {
-        when(board.isFull(anyString())).thenReturn(true);
+        when(board.isFull()).thenReturn(true);
     }
 
     @Before
@@ -47,19 +47,19 @@ public class TicTacToeGameTest {
 
     @Test
     public void shouldTerminateRoundsWhenBoardIsAlreadyFull() throws Exception {
-        when(board.isFull(anyString())).thenReturn(true, false);
+        when(board.isFull()).thenReturn(true, false);
         ticTacToeGame.play();
 
-        verify(board).isFull(anyString());
+        verify(board).isFull();
     }
 
     @Test
     public void shouldKeepDoingRoundsUntilBoardIsFull() throws Exception {
     //  Note: In this test, we don't care about whether the players alternate
-        when(board.isFull(anyString())).thenReturn(false, true, false);
+        when(board.isFull()).thenReturn(false, true, false);
         ticTacToeGame.play();
 
-        verify(board, times(2)).isFull(anyString());
+        verify(board, times(2)).isFull();
     }
 
     @Test
@@ -72,7 +72,7 @@ public class TicTacToeGameTest {
 
     @Test
     public void shouldAskSecondPlayerAfterFirstPlayerGoes() throws Exception {
-        when(board.isFull(anyString())).thenReturn(false, false, true);
+        when(board.isFull()).thenReturn(false, false, true);
         ticTacToeGame.play();
 
         InOrder inOrder = inOrder(firstPlayer, secondPlayer);
@@ -82,7 +82,7 @@ public class TicTacToeGameTest {
 
     @Test
     public void shouldAskFirstPlayerAfterSecondPlayerGoes() throws Exception {
-        when(board.isFull(anyString())).thenReturn(false, false, false, true);
+        when(board.isFull()).thenReturn(false, false, false, true);
         ticTacToeGame.play();
 
         InOrder inOrder = inOrder(firstPlayer, secondPlayer);

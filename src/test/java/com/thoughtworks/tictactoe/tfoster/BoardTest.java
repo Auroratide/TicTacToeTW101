@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -19,12 +20,16 @@ public class BoardTest {
     private PrintStream printStream;
     private Board board;
     private List<String> slots;
+    private Collection<String> markers;
 
     @Before
     public void setUp() throws Exception {
+        markers = new ArrayList<>();
+        markers.add("X");
+        markers.add("O");
         printStream = mock(PrintStream.class);
         slots = new ArrayList<>();
-        board = new Board(printStream, slots);
+        board = new Board(markers, printStream, slots);
         board.initialize();
     }
 
@@ -91,19 +96,19 @@ public class BoardTest {
     @Test
     public void shouldReturnFalseWhenNoSlotsAreTaken() throws Exception {
         slots.set(0, "1");
-        assertFalse(board.isTaken(1, "XO"));
+        assertFalse(board.isTaken(1));
     }
 
     @Test
-    public void shouldReturnTrueWhenSlotIsTakenByAnX() throws Exception {
+    public void shouldReturnTrueWhenSlotIsTakenByFirstMarker() throws Exception {
         slots.set(2, "X");
-        assertTrue(board.isTaken(3, "XO"));
+        assertTrue(board.isTaken(3));
     }
 
     @Test
-    public void shouldReturnTrueWhenSlotIsTakenByAnO() throws Exception {
+    public void shouldReturnTrueWhenSlotIsTakenBySecondMarker() throws Exception {
         slots.set(7, "O");
-        assertTrue(board.isTaken(8, "XO"));
+        assertTrue(board.isTaken(8));
     }
 
     @Test
@@ -112,7 +117,7 @@ public class BoardTest {
         for(int i = 0; i < 9; ++i)
             slots.add("X");
 
-        assertTrue(board.isFull("X"));
+        assertTrue(board.isFull());
     }
 
     @Test
@@ -121,7 +126,7 @@ public class BoardTest {
         for(int i = 0; i < 9; ++i)
             slots.add("O");
 
-        assertTrue(board.isFull("O"));
+        assertTrue(board.isFull());
     }
 
     @Test
@@ -131,7 +136,7 @@ public class BoardTest {
             slots.add("X");
         slots.set(2, "3");
 
-        assertFalse(board.isFull("X"));
+        assertFalse(board.isFull());
     }
 
     @Test
@@ -142,6 +147,6 @@ public class BoardTest {
         slots.set(1, "O");
         slots.set(5, "O");
 
-        assertTrue(board.isFull("XO"));
+        assertTrue(board.isFull());
     }
 }

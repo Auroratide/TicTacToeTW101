@@ -2,7 +2,6 @@ package com.thoughtworks.tictactoe.tfoster;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.omg.CORBA.PolicyListHelper;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
@@ -10,7 +9,6 @@ import java.io.PrintStream;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
 public class PlayerTest {
@@ -63,15 +61,15 @@ public class PlayerTest {
 
     @Test
     public void shouldKeepPollingPlayerWhileSlotChoiceIsAlreadyTaken() throws Exception {
-        when(board.isTaken(anyInt(), anyString())).thenReturn(true, true, false, true);
+        when(board.isTaken(anyInt())).thenReturn(true, true, false, true);
         player.makeChoice();
 
-        verify(board, times(3)).isTaken(anyInt(), anyString());
+        verify(board, times(3)).isTaken(anyInt());
     }
 
     @Test
     public void shouldInformPlayerWhenTakenSlotWasSelected() throws Exception {
-        when(board.isTaken(anyInt(), anyString())).thenReturn(true, false);
+        when(board.isTaken(anyInt())).thenReturn(true, false);
         player.makeChoice();
 
         verify(printStream).println("Location already taken");

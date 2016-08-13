@@ -23,7 +23,7 @@ public class Player {
         printStream.println("Input the number of the slot where you want your mark");
 
         int playerSlotChoice = getPlayerInput();
-        while(board.isTaken(playerSlotChoice, "XO")) {
+        while(board.isTaken(playerSlotChoice)) {
             printStream.println("Location already taken");
             playerSlotChoice = getPlayerInput();
         }

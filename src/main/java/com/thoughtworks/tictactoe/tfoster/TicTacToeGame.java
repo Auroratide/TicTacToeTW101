@@ -31,7 +31,7 @@ public class TicTacToeGame {
         currentPlayer = firstPlayer;
         currentMarker = FIRST_PLAYER_MARKER;
 
-        while(!board.isFull(FIRST_PLAYER_MARKER + SECOND_PLAYER_MARKER)) {
+        while(!board.isFull()) {
             doRound(currentPlayer, currentMarker);
             swapPlayers();
             swapMarkers();
@@ -42,7 +42,7 @@ public class TicTacToeGame {
 
     public void doRound(Player player, String marker) {
         int playerSlotChoice = player.makeChoice();
-        while(board.isTaken(playerSlotChoice, FIRST_PLAYER_MARKER + SECOND_PLAYER_MARKER)) {
+        while(board.isTaken(playerSlotChoice)) {
             printStream.println("Location already taken");
             playerSlotChoice = player.makeChoice();
         }

@@ -1,16 +1,19 @@
 package com.thoughtworks.tictactoe.tfoster;
 
 import java.io.PrintStream;
+import java.util.Collection;
 import java.util.List;
 
 public class Board {
 
-    public static final String SEPARATOR = "|";
+    public static final String COL_SEPARATOR = "|";
     public static final String ROW_SEPARATOR = "-----";
+    private Collection<String> markers;
     private PrintStream printStream;
     private List<String> slots;
 
-    public Board(PrintStream printStream, List<String> slots) {
+    public Board(Collection<String> markers, PrintStream printStream, List<String> slots) {
+        this.markers = markers;
         this.printStream = printStream;
         this.slots = slots;
     }
@@ -22,11 +25,11 @@ public class Board {
     }
 
     public void show() {
-        String toShow = String.format("%s" + SEPARATOR + "%s" + SEPARATOR + "%s" + "\n" +
+        String toShow = String.format("%s" + COL_SEPARATOR + "%s" + COL_SEPARATOR + "%s" + "\n" +
                                         ROW_SEPARATOR + "\n" +
-                                      "%s" + SEPARATOR + "%s" + SEPARATOR + "%s" + "\n" +
+                                      "%s" + COL_SEPARATOR + "%s" + COL_SEPARATOR + "%s" + "\n" +
                                         ROW_SEPARATOR + "\n" +
-                                      "%s" + SEPARATOR + "%s" + SEPARATOR + "%s", slots.toArray());
+                                      "%s" + COL_SEPARATOR + "%s" + COL_SEPARATOR + "%s", slots.toArray());
 
         printStream.println(toShow);
     }
@@ -35,15 +38,13 @@ public class Board {
         slots.set(slot - 1, letter);
     }
 
-    public boolean isTaken(int slot, String validTokens) {
-    //  validTokens represents tokens that can be construed as occupying a square.
-    //  For Tic Tac Toe, this is probably "XO"; allows Board to not be bound to X and O exclusively
-        return validTokens.contains(slots.get(slot - 1));
+    public boolean isTaken(int slot) {
+        return markers.contains(slots.get(slot - 1));
     }
 
-    public boolean isFull(String validTokens) {
+    public boolean isFull() {
         for(int i = 0; i < slots.size(); ++i)
-            if(!isTaken(i + 1, validTokens))
+            if(!isTaken(i + 1))
                 return false;
         return true;
     }
