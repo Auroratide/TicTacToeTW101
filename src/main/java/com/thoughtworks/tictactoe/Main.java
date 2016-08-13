@@ -13,8 +13,8 @@ public class Main {
     public static void main(String[] args) {
         PrintStream printStream = System.out;
         Board board = new Board(printStream, new ArrayList<String>());
-        Player firstPlayer = new Player(new BufferedReader(new InputStreamReader(System.in)));
-        Player secondPlayer = new Player(new BufferedReader(new InputStreamReader(System.in)));
+        Player firstPlayer = new Player(printStream, new BufferedReader(new InputStreamReader(System.in)));
+        Player secondPlayer = new Player(printStream, new BufferedReader(new InputStreamReader(System.in)));
         TicTacToeGame game = new TicTacToeGame(printStream, board, firstPlayer, secondPlayer);
         game.play();
     }

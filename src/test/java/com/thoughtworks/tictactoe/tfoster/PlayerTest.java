@@ -4,21 +4,33 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
+import java.io.PrintStream;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class PlayerTest {
 
     private BufferedReader reader;
     private Player player;
+    private PrintStream printStream;
 
     @Before
     public void setUp() throws Exception {
         reader = mock(BufferedReader.class);
-        player = new Player(reader);
+        printStream = mock(PrintStream.class);
+        player = new Player(printStream, reader);
+    }
+
+    @Test
+    public void shouldPromptUserForInputWhenMakingAChoice() throws Exception {
+        when(reader.readLine()).thenReturn("1");
+        player.makeChoice();
+
+        verify(printStream).println("Input the number of the slot where you want your mark");
     }
 
     @Test
