@@ -1,8 +1,6 @@
 package com.thoughtworks.tictactoe;
 
-import com.thoughtworks.tictactoe.tfoster.Board;
-import com.thoughtworks.tictactoe.tfoster.Game;
-import com.thoughtworks.tictactoe.tfoster.Player;
+import com.thoughtworks.tictactoe.tfoster.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -17,8 +15,10 @@ public class Main {
         markers.add("X");
         markers.add("O");
         Board board = new Board(markers, printStream, new ArrayList<String>());
-        Player firstPlayer = new Player("Player 1", markers.get(0), board, printStream, new BufferedReader(new InputStreamReader(System.in)));
-        Player secondPlayer = new Player("Player 2", markers.get(1), board, printStream, new BufferedReader(new InputStreamReader(System.in)));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Player firstPlayer = new HumanPlayer("Player 1", markers.get(0), board, printStream, reader);
+//        Player secondPlayer = new HumanPlayer("Player 2", markers.get(1), board, printStream, reader);
+        Player secondPlayer = new ComputerPlayer("Computer", markers.get(1), board);
         Game game = new Game(printStream, board, firstPlayer, secondPlayer);
         game.play();
     }

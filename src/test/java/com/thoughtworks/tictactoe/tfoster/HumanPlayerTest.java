@@ -9,7 +9,7 @@ import java.io.PrintStream;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.*;
 
-public class PlayerTest {
+public class HumanPlayerTest {
 
     private BufferedReader reader;
     private Player player;
@@ -21,7 +21,7 @@ public class PlayerTest {
         board = mock(Board.class);
         reader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
-        player = new Player("<NAME>", "<MARKER>", board, printStream, reader);
+        player = new HumanPlayer("<NAME>", "<MARKER>", board, printStream, reader);
 
         when(reader.readLine()).thenReturn("1");
     }
@@ -51,7 +51,7 @@ public class PlayerTest {
 
     @Test
     public void shouldMarkBoardWithOWhenPlayerMarkerIsO() throws Exception {
-        player = new Player("Player 2", "O", board, printStream, reader);
+        player = new HumanPlayer("Player 2", "O", board, printStream, reader);
         player.takeTurn();
 
         verify(board).mark(1, "O");
