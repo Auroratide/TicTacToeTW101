@@ -23,8 +23,13 @@ public class Game {
         board.show();
         currentPlayer = firstPlayer;
 
-        while(!board.isFull())
-            doTurn();
+        while(!board.isFull()) {
+            currentPlayer.takeTurn();
+            if(currentPlayer.hasWon())
+                break;
+            swapPlayers();
+            board.show();
+        }
 
         printStream.println("Game is a draw");
     }

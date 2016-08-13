@@ -74,4 +74,11 @@ public class PlayerTest {
 
         verify(printStream).println("Location already taken");
     }
+
+    @Test
+    public void shouldPollBoardForThreeInARowWhenAskedIfPlayerHasWon() throws Exception {
+        player.hasWon();
+
+        verify(board).hasThreeInARow("<MARKER>");
+    }
 }

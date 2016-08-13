@@ -20,6 +20,10 @@ public class GameTest {
         when(board.isFull()).thenReturn(true);
     }
 
+    private void takeOneTurn() {
+        when(board.isFull()).thenReturn(false, true);
+    }
+
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
@@ -88,5 +92,22 @@ public class GameTest {
         InOrder inOrder = inOrder(firstPlayer, secondPlayer);
         inOrder.verify(secondPlayer).takeTurn();
         inOrder.verify(firstPlayer).takeTurn();
+    }
+
+    @Test
+    public void shouldAskPlayerIfPlayerHasWonAfterPlayerTakesTurn() throws Exception {
+        takeOneTurn();
+        game.play();
+
+        verify(firstPlayer).hasWon();
+    }
+
+    @Test
+    public void shouldStopGameWhenPlayerHasWon() throws Exception {
+        takeOneTurn();
+        when(firstPlayer.hasWon()).thenReturn(true);
+        game.play();
+
+        verify(board, times(1)).isFull();
     }
 }

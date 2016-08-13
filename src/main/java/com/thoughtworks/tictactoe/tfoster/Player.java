@@ -41,4 +41,8 @@ public class Player {
         }
         return -1;
     }
+
+    public boolean hasWon() {
+        return board.hasThreeInARow(marker);
+    }
 }

@@ -149,4 +149,25 @@ public class BoardTest {
 
         assertTrue(board.isFull());
     }
+
+    @Test
+    public void shouldReturnTrueWhenXHasThreeInARow() throws Exception {
+        slots.set(3, "X");
+        slots.set(4, "X");
+        slots.set(5, "X");
+
+        assertTrue(board.hasThreeInARow("X"));
+    }
+
+    @Test
+    public void shouldReturnFalseWhenXDoesNotHaveThreeInARow() throws Exception {
+        slots.clear();
+        for(int i = 0; i < 9; ++i)
+            slots.add("X");
+        slots.set(0, "O");
+        slots.set(4, "O");
+        slots.set(8, "O");
+
+        assertFalse(board.hasThreeInARow("X"));
+    }
 }

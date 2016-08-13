@@ -48,4 +48,14 @@ public class Board {
                 return false;
         return true;
     }
+
+    public boolean hasThreeInARow(String marker) {
+        for(int i = 0; i <= 2; ++i) {
+            if(slots.get(3 * i).equals(marker) &&
+                    slots.get(3 * i + 1).equals(marker) &&
+                    slots.get(3 * i + 2).equals(marker))
+                return true;
+        }
+        return false;
+    }
 }
