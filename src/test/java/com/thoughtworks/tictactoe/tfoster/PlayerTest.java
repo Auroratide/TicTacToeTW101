@@ -2,48 +2,78 @@ package com.thoughtworks.tictactoe.tfoster;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.omg.CORBA.PolicyListHelper;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.*;
 
 public class PlayerTest {
 
     private BufferedReader reader;
     private Player player;
     private PrintStream printStream;
+    private Board board;
 
     @Before
     public void setUp() throws Exception {
+        board = mock(Board.class);
         reader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
-        player = new Player(printStream, reader);
+        player = new Player("<MARKER>", board, printStream, reader);
+
+        when(reader.readLine()).thenReturn("1");
     }
 
     @Test
     public void shouldPromptUserForInputWhenMakingAChoice() throws Exception {
-        when(reader.readLine()).thenReturn("1");
         player.makeChoice();
 
         verify(printStream).println("Input the number of the slot where you want your mark");
     }
 
     @Test
-    public void shouldReturn1WhenUserInputs1() throws Exception {
+    public void shouldMarkFirstSlotOnBoardWhenPlayerSelectsFirstSlot() throws Exception {
         when(reader.readLine()).thenReturn("1");
+        player.makeChoice();
 
-        assertThat(player.makeChoice(), is(1));
+        verify(board).mark(1, "<MARKER>");
     }
 
     @Test
-    public void shouldReturn4WhenUserInputs4() throws Exception {
-        when(reader.readLine()).thenReturn("4");
+    public void shouldMarkSecondSlotOnBoardWhenPlayerSelectsSecondSlot() throws Exception {
+        when(reader.readLine()).thenReturn("2");
+        player.makeChoice();
 
-        assertThat(player.makeChoice(), is(4));
+        verify(board).mark(2, "<MARKER>");
+    }
+
+    @Test
+    public void shouldMarkBoardWithOWhenPlayerMarkerIsO() throws Exception {
+        player = new Player("O", board, printStream, reader);
+        player.makeChoice();
+
+        verify(board).mark(1, "O");
+    }
+
+    @Test
+    public void shouldKeepPollingPlayerWhileSlotChoiceIsAlreadyTaken() throws Exception {
+        when(board.isTaken(anyInt(), anyString())).thenReturn(true, true, false, true);
+        player.makeChoice();
+
+        verify(board, times(3)).isTaken(anyInt(), anyString());
+    }
+
+    @Test
+    public void shouldInformPlayerWhenTakenSlotWasSelected() throws Exception {
+        when(board.isTaken(anyInt(), anyString())).thenReturn(true, false);
+        player.makeChoice();
+
+        verify(printStream).println("Location already taken");
     }
 }

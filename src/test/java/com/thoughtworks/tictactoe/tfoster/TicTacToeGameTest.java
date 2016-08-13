@@ -46,47 +46,6 @@ public class TicTacToeGameTest {
     }
 
     @Test
-    public void shouldMarkFirstSlotOnBoardAsXWhenFirstPlayerSelectsXInFirstSlot() throws Exception {
-        when(firstPlayer.makeChoice()).thenReturn(1);
-        ticTacToeGame.doRound(firstPlayer, "X");
-
-        verify(board).mark(1, "X");
-    }
-
-    @Test
-    public void shouldMarkSecondSlotOnBoardAsXWhenFirstPlayerSelectsXInSecondSlot() throws Exception {
-        when(firstPlayer.makeChoice()).thenReturn(2);
-        ticTacToeGame.doRound(firstPlayer, "X");
-
-        verify(board).mark(2, "X");
-    }
-
-    @Test
-    public void shouldMarkThirdSlotOnBoardAsOWhenSecondPlayerSelectsThirdSlot() throws Exception {
-        when(secondPlayer.makeChoice()).thenReturn(3);
-        ticTacToeGame.doRound(secondPlayer, "O");
-
-        verify(board).mark(3, "O");
-    }
-
-    @Test
-    public void shouldKeepPollingPlayerWhileSlotChoiceIsAlreadyTaken() throws Exception {
-        when(board.isTaken(anyInt(), anyString())).thenReturn(true, true, false, true);
-        ticTacToeGame.doRound(firstPlayer, "X");
-
-        verify(board, times(3)).isTaken(anyInt(), anyString());
-        verify(board).mark(anyInt(), anyString());
-    }
-
-    @Test
-    public void shouldInformPlayerWhenTakenSlotWasSelected() throws Exception {
-        when(board.isTaken(anyInt(), anyString())).thenReturn(true, false);
-        ticTacToeGame.doRound(firstPlayer, "X");
-
-        verify(printStream).println("Location already taken");
-    }
-
-    @Test
     public void shouldTerminateRoundsWhenBoardIsAlreadyFull() throws Exception {
         when(board.isFull(anyString())).thenReturn(true, false);
         ticTacToeGame.play();

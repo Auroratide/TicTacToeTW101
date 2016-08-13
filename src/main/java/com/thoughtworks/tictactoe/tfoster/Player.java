@@ -6,24 +6,41 @@ import java.io.PrintStream;
 
 public class Player {
 
+    private String marker;
+    private Board board;
     private PrintStream printStream;
     private BufferedReader reader;
 
-    public Player(PrintStream printStream, BufferedReader reader) {
+    public Player(String marker, Board board, PrintStream printStream, BufferedReader reader) {
+        this.marker = marker;
+        this.board = board;
         this.printStream = printStream;
         this.reader = reader;
     }
 
     public int makeChoice() {
+
         printStream.println("Input the number of the slot where you want your mark");
+
+        int playerSlotChoice = getPlayerInput();
+        while(board.isTaken(playerSlotChoice, "XO")) {
+            printStream.println("Location already taken");
+            playerSlotChoice = getPlayerInput();
+        }
+
+        board.mark(playerSlotChoice, marker);
+
+        return playerSlotChoice;
+    }
+
+    private int getPlayerInput() {
         printStream.print("> ");
 
-        String playerInput = "";
         try {
-            playerInput = reader.readLine();
+            return Integer.parseInt(reader.readLine());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Integer.parseInt(playerInput);
+        return -1;
     }
 }
